@@ -27,6 +27,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'status'
     ];
 
     /**
@@ -58,4 +60,13 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function posts()
+    {
+        return $this->hasMany(Posts::class);
+    }
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
 }
